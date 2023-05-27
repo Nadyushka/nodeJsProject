@@ -5,8 +5,7 @@ import {productsRouter} from "./routes/products-router";
 const app = express()
 const port = 5000
 
-
-//const addresses = [{id: 1, value: 'Minsk'}, {id: 2, title: 'Grodno'}]
+const addresses = [{id: 1, value: 'Minsk'}, {id: 2, title: 'Grodno'}]
 
 const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
