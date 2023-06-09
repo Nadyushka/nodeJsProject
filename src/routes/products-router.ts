@@ -30,7 +30,7 @@ productsRouter.put('/:productId', (req: Request, res: Response) => {
     }
 })
 productsRouter.delete('/:productId', (req: Request, res: Response) => {
-    const deleteProduct = productRepository.deleteProduct(+req.params.productId)
-    deleteProduct ?  res.send(204) :   res.send(404)
-    
+    const isDeleted = productRepository.deleteProduct(+req.params.productId)
+    isDeleted ?  res.send(204) :   res.send(404)
+
 })
