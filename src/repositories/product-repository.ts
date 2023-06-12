@@ -23,7 +23,7 @@ export const productRepository = {
         return products
     },
     updateProductTitle(productId: number, title:string) {
-        const selectedProduct = products.find(p => p.id == +req.params.productId)
+        const selectedProduct = products.find(p => p.id == productId)
         if (selectedProduct) {
             selectedProduct.title = title
             return products
