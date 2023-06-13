@@ -2,7 +2,7 @@ const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'apple'}]
 
 
 export const productRepository = {
-    findProduct(title: string | null | undefined) {
+    async findProduct(title: string | null | undefined) {
         if (title) {
             const selectedProduct = products
                 .filter(p => p.title.indexOf(title) > -1)
@@ -11,10 +11,10 @@ export const productRepository = {
             return products
         }
     },
-    getProductById(productId: number) {
+    async getProductById(productId: number) {
         return products.find(p => p.id == productId)
     },
-    createNewProduct(title: string) {
+    async createNewProduct(title: string) {
         const newProduct = {
             id: +(new Date()),
             title
@@ -22,7 +22,7 @@ export const productRepository = {
         products.push(newProduct)
         return products
     },
-    updateProductTitle(productId: number, title:string) {
+    async updateProductTitle(productId: number, title: string) {
         const selectedProduct = products.find(p => p.id == productId)
         if (selectedProduct) {
             selectedProduct.title = title
@@ -31,7 +31,7 @@ export const productRepository = {
             return false
         }
     },
-    deleteProduct(productId:number){
+    async deleteProduct(productId: number) {
         if (productId) {
             for (let i = 0; i < products.length; i++) {
                 if (products[i].id === productId) {
@@ -40,7 +40,7 @@ export const productRepository = {
                 }
             }
         } else {
-           return false
+            return false
         }
     }
 }

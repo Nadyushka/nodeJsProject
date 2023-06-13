@@ -11,39 +11,38 @@ const titleValidation = body('title').trim().isLength({
 }).withMessage('Title length should be from 3 to 10 symbols')
 
 
-productsRouter.get('/', (req: Request, res: Response) => {
-    const foundProducts = productRepository
-        .findProduct(req.query.title?.toString())
+productsRouter.get('/',  async (req: Request, res: Response) => {
+    const foundProducts = await productRepository.findProduct(req.query.title?.toString())
     res.send(foundProducts)
 })
-productsRouter.get('/:productId', (req: Request, res: Response) => {
-    const selectedProduct = productRepository.getProductById(+req.params.productId)
+productsRouter.get('/:productId', async (req: Request, res: Response) => {
+    const selectedProduct = await productRepository.getProductById(+req.params.productId)
     if (selectedProduct) {
         res.send(selectedProduct)
     } else {
         res.send(404)
     }
 })
-productsRouter.post('/', (req: Request, res: Response) => {
+productsRouter.post('/', async (req: Request, res: Response) => {
     titleValidation;
     inputValidationMiddleware;
 
 
-    const products = productRepository.createNewProduct(req.body.title)
+    const products = await productRepository.createNewProduct(req.body.title)
     res.status(201).send(products)
 })
-productsRouter.put('/:productId', (req: Request, res: Response) => {
+productsRouter.put('/:productId', async (req: Request, res: Response) => {
     titleValidation;
     inputValidationMiddleware;
-    const updateProduct = productRepository.updateProductTitle(+req.params.productId, req.body.title)
+    const updateProduct = await productRepository.updateProductTitle(+req.params.productId, req.body.title)
     if (updateProduct) {
         res.send(updateProduct)
     } else {
         res.send(404)
     }
 })
-productsRouter.delete('/:productId', (req: Request, res: Response) => {
-    const isDeleted = productRepository.deleteProduct(+req.params.productId)
+productsRouter.delete('/:productId', async (req: Request, res: Response) => {
+    const isDeleted = await productRepository.deleteProduct(+req.params.productId)
     isDeleted ? res.send(204) : res.send(404)
 
 })
